@@ -1,0 +1,2370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Portal System</title>
+    <style>
+        :root {
+            --color-white: rgba(255, 255, 255, 1);
+            --color-black: rgba(0, 0, 0, 1);
+            --color-cream-50: rgba(252, 252, 249, 1);
+            --color-cream-100: rgba(255, 255, 253, 1);
+            --color-gray-200: rgba(245, 245, 245, 1);
+            --color-gray-300: rgba(167, 169, 169, 1);
+            --color-gray-400: rgba(119, 124, 124, 1);
+            --color-slate-500: rgba(98, 108, 113, 1);
+            --color-brown-600: rgba(94, 82, 64, 1);
+            --color-charcoal-700: rgba(31, 33, 33, 1);
+            --color-charcoal-800: rgba(38, 40, 40, 1);
+            --color-slate-900: rgba(19, 52, 59, 1);
+            --color-teal-300: rgba(50, 184, 198, 1);
+            --color-teal-400: rgba(45, 166, 178, 1);
+            --color-teal-500: rgba(33, 128, 141, 1);
+            --color-teal-600: rgba(29, 116, 128, 1);
+            --color-teal-700: rgba(26, 104, 115, 1);
+            --color-red-400: rgba(255, 84, 89, 1);
+            --color-red-500: rgba(192, 21, 47, 1);
+            --color-orange-400: rgba(230, 129, 97, 1);
+            --color-orange-500: rgba(168, 75, 47, 1);
+            
+            --color-brown-600-rgb: 94, 82, 64;
+            --color-teal-500-rgb: 33, 128, 141;
+            --color-slate-900-rgb: 19, 52, 59;
+            --color-slate-500-rgb: 98, 108, 113;
+            --color-red-500-rgb: 192, 21, 47;
+            --color-red-400-rgb: 255, 84, 89;
+            --color-orange-500-rgb: 168, 75, 47;
+            
+            --color-bg-1: rgba(59, 130, 246, 0.08);
+            --color-bg-2: rgba(245, 158, 11, 0.08);
+            --color-bg-3: rgba(34, 197, 94, 0.08);
+            --color-bg-4: rgba(239, 68, 68, 0.08);
+            --color-bg-5: rgba(147, 51, 234, 0.08);
+            
+            --color-background: var(--color-cream-50);
+            --color-surface: var(--color-cream-100);
+            --color-text: var(--color-slate-900);
+            --color-text-secondary: var(--color-slate-500);
+            --color-primary: var(--color-teal-500);
+            --color-primary-hover: var(--color-teal-600);
+            --color-primary-active: var(--color-teal-700);
+            --color-secondary: rgba(var(--color-brown-600-rgb), 0.12);
+            --color-secondary-hover: rgba(var(--color-brown-600-rgb), 0.2);
+            --color-border: rgba(var(--color-brown-600-rgb), 0.2);
+            --color-btn-primary-text: var(--color-cream-50);
+            --color-card-border: rgba(var(--color-brown-600-rgb), 0.12);
+            --color-error: var(--color-red-500);
+            --color-success: var(--color-teal-500);
+            --color-warning: var(--color-orange-500);
+            
+            --font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --radius-base: 8px;
+            --radius-lg: 12px;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.04), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+        }
+
+        [data-theme="dark"] {
+            --color-gray-400-rgb: 119, 124, 124;
+            --color-teal-300-rgb: 50, 184, 198;
+            --color-gray-300-rgb: 167, 169, 169;
+            --color-gray-200-rgb: 245, 245, 245;
+            
+            --color-bg-1: rgba(29, 78, 216, 0.15);
+            --color-bg-2: rgba(180, 83, 9, 0.15);
+            --color-bg-3: rgba(21, 128, 61, 0.15);
+            --color-bg-4: rgba(185, 28, 28, 0.15);
+            --color-bg-5: rgba(107, 33, 168, 0.15);
+            
+            --color-background: var(--color-charcoal-700);
+            --color-surface: var(--color-charcoal-800);
+            --color-text: var(--color-gray-200);
+            --color-text-secondary: rgba(var(--color-gray-300-rgb), 0.7);
+            --color-primary: var(--color-teal-300);
+            --color-primary-hover: var(--color-teal-400);
+            --color-secondary: rgba(var(--color-gray-400-rgb), 0.15);
+            --color-secondary-hover: rgba(var(--color-gray-400-rgb), 0.25);
+            --color-border: rgba(var(--color-gray-400-rgb), 0.3);
+            --color-btn-primary-text: var(--color-slate-900);
+            --color-card-border: rgba(var(--color-gray-400-rgb), 0.15);
+            --color-error: var(--color-red-400);
+            --color-success: var(--color-teal-300);
+            --color-warning: var(--color-orange-400);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family-base);
+            background-color: var(--color-background);
+            color: var(--color-text);
+            line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .app-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 260px;
+            background-color: var(--color-surface);
+            border-right: 1px solid var(--color-border);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-teal-400));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .nav-menu {
+            list-style: none;
+            flex: 1;
+        }
+
+        .nav-item {
+            margin-bottom: 8px;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            color: var(--color-text);
+            text-decoration: none;
+            border-radius: var(--radius-base);
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .nav-link:hover {
+            background-color: var(--color-secondary);
+        }
+
+        .nav-link.active {
+            background-color: var(--color-primary);
+            color: var(--color-btn-primary-text);
+        }
+
+        .nav-icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        .main-content {
+            flex: 1;
+            margin-left: 260px;
+            padding: 30px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: var(--color-surface);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--color-card-border);
+        }
+
+        .header-title {
+            font-size: 28px;
+            font-weight: 600;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .theme-toggle {
+            background-color: var(--color-secondary);
+            border: 1px solid var(--color-border);
+            padding: 8px 12px;
+            border-radius: var(--radius-base);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--color-secondary-hover);
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-teal-400));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: var(--radius-base);
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background-color: var(--color-primary);
+            color: var(--color-btn-primary-text);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--color-primary-hover);
+        }
+
+        .btn-secondary {
+            background-color: var(--color-secondary);
+            color: var(--color-text);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--color-secondary-hover);
+        }
+
+        .card {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-card-border);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--color-card-border);
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, var(--color-bg-1), var(--color-bg-2));
+            border: 1px solid var(--color-card-border);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            font-weight: 500;
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--color-text);
+        }
+
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            background-color: var(--color-primary);
+            border-radius: var(--radius-base);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            margin-bottom: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-base);
+            background-color: var(--color-surface);
+            color: var(--color-text);
+            font-size: 14px;
+            transition: border-color 0.2s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--color-primary);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--color-card-border);
+        }
+
+        th {
+            font-weight: 600;
+            color: var(--color-text-secondary);
+            font-size: 14px;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .status-success {
+            background-color: rgba(var(--color-teal-500-rgb), 0.15);
+            color: var(--color-success);
+            border: 1px solid rgba(var(--color-teal-500-rgb), 0.25);
+        }
+
+        .status-warning {
+            background-color: rgba(var(--color-orange-500-rgb), 0.15);
+            color: var(--color-warning);
+            border: 1px solid rgba(var(--color-orange-500-rgb), 0.25);
+        }
+
+        .status-error {
+            background-color: rgba(var(--color-red-500-rgb), 0.15);
+            color: var(--color-error);
+            border: 1px solid rgba(var(--color-red-500-rgb), 0.25);
+        }
+
+        .login-container {
+            display: flex;
+            min-height: 100vh;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--color-bg-1), var(--color-bg-3));
+        }
+
+        .login-card {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-card-border);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            width: 100%;
+            max-width: 420px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .login-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .login-subtitle {
+            color: var(--color-text-secondary);
+            font-size: 14px;
+        }
+
+        .role-selector {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .role-btn {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-base);
+            background-color: var(--color-surface);
+            color: var(--color-text);
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .role-btn.active {
+            border-color: var(--color-primary);
+            background-color: var(--color-primary);
+            color: var(--color-btn-primary-text);
+        }
+
+        .id-card {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-teal-400));
+            border-radius: var(--radius-lg);
+            padding: 30px;
+            color: white;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .id-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+        }
+
+        .id-card-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .id-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .id-photo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--color-primary);
+        }
+
+        .id-qr {
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 8px;
+        }
+
+        .id-info {
+            margin-top: 15px;
+        }
+
+        .id-name {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .id-details {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: var(--color-surface);
+            border-radius: var(--radius-lg);
+            padding: 30px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-title {
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--color-text);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .event-item {
+            display: flex;
+            gap: 16px;
+            padding: 16px;
+            background-color: var(--color-bg-1);
+            border-radius: var(--radius-base);
+            margin-bottom: 12px;
+        }
+
+        .event-date {
+            text-align: center;
+            min-width: 60px;
+        }
+
+        .event-day {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--color-primary);
+        }
+
+        .event-month {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+        }
+
+        .event-content {
+            flex: 1;
+        }
+
+        .event-title {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .event-time {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background-color: var(--color-secondary);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: var(--color-primary);
+            transition: width 0.3s ease;
+        }
+
+        .file-upload {
+            border: 2px dashed var(--color-border);
+            border-radius: var(--radius-base);
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .file-upload:hover {
+            border-color: var(--color-primary);
+            background-color: var(--color-bg-1);
+        }
+
+        .timetable-grid {
+            display: grid;
+            grid-template-columns: 80px repeat(5, 1fr);
+            gap: 1px;
+            background-color: var(--color-border);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-base);
+            overflow: hidden;
+        }
+
+        .timetable-cell {
+            background-color: var(--color-surface);
+            padding: 12px 8px;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+        }
+
+        .timetable-header {
+            background-color: var(--color-primary);
+            color: var(--color-btn-primary-text);
+            font-weight: 600;
+        }
+
+        .timetable-time {
+            font-weight: 600;
+            color: var(--color-text-secondary);
+            font-size: 12px;
+        }
+
+        .timetable-subject {
+            text-align: center;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s;
+            }
+
+            .sidebar.mobile-open {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Screen -->
+    <div id="loginScreen" class="login-container">
+        <div class="login-card">
+            <div style="display: flex; justify-content: flex-end; margin-bottom: 20px;">
+                <button class="theme-toggle" onclick="toggleTheme()">
+                    <span id="themeIcon">🌙</span>
+                    <span id="themeText">Dark Mode</span>
+                </button>
+            </div>
+            <div class="login-header">
+                <div class="logo" style="justify-content: center; margin-bottom: 20px;">
+                    <div class="logo-icon">SP</div>
+                    <span>Student Portal</span>
+                </div>
+                <h1 class="login-title">Welcome Back</h1>
+                <p class="login-subtitle">Sign in to continue to your portal</p>
+            </div>
+            
+            <div class="role-selector">
+                <button class="role-btn active" id="studentRoleBtn" onclick="selectRole('student')">
+                    👨‍🎓 Student
+                </button>
+                <button class="role-btn" id="adminRoleBtn" onclick="selectRole('admin')">
+                    👨‍💼 Admin
+                </button>
+            </div>
+
+            <form onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label class="form-label">Email or Student ID</label>
+                    <input type="text" class="form-control" id="loginEmail" placeholder="Enter your email or ID" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input type="password" class="form-control" id="loginPassword" placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 20px;">
+                    Sign In
+                </button>
+            </form>
+            <p style="text-align: center; margin-top: 20px; font-size: 14px; color: var(--color-text-secondary);">
+                Demo Credentials - Student: student@demo.com / student123 | Admin: admin@demo.com / admin123
+            </p>
+        </div>
+    </div>
+
+    <!-- Student Portal -->
+    <div id="studentPortal" class="app-container hidden">
+        <aside class="sidebar">
+            <div class="logo">
+                <div class="logo-icon">SP</div>
+                <span>Student Portal</span>
+            </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a class="nav-link active" onclick="showSection('dashboard')">
+                            <span class="nav-icon">📊</span>
+                            Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" onclick="showSection('results')">
+                            <span class="nav-icon">📝</span>
+                            Results
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" onclick="showSection('attendance')">
+                            <span class="nav-icon">✓</span>
+                            Attendance
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" onclick="showSection('timetable')">
+                            <span class="nav-icon">📅</span>
+                            Timetable
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" onclick="showSection('events')">
+                            <span class="nav-icon">🎉</span>
+                            Events
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" onclick="showSection('syllabus')">
+                            <span class="nav-icon">📚</span>
+                            Syllabus
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" onclick="showSection('assignments')">
+                            <span class="nav-icon">📄</span>
+                            Assignments
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" onclick="showSection('library')">
+                            <span class="nav-icon">📖</span>
+                            Library
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" onclick="showSection('achievements')">
+                            <span class="nav-icon">🏆</span>
+                            Achievements
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" onclick="showSection('documents')">
+                            <span class="nav-icon">📁</span>
+                            Documents
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" onclick="showSection('fees')">
+                            <span class="nav-icon">💳</span>
+                            Fees
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" onclick="showSection('idcard')">
+                            <span class="nav-icon">🎫</span>
+                            Smart ID Card
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div style="margin-top: auto; padding-top: 20px; border-top: 1px solid var(--color-border);">
+                <a class="nav-link" onclick="logout()">
+                    <span class="nav-icon">🚪</span>
+                    Logout
+                </a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="header">
+                <h1 class="header-title" id="sectionTitle">Dashboard</h1>
+                <div class="header-actions">
+                    <button class="theme-toggle" onclick="toggleTheme()">
+                        <span id="themeIconApp">🌙</span>
+                    </button>
+                    <div class="user-profile">
+                        <div class="user-avatar">RK</div>
+                        <div>
+                            <div style="font-weight: 600; font-size: 14px;">Rahul Kumar</div>
+                            <div style="font-size: 12px; color: var(--color-text-secondary);">Class 6 - A</div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Section -->
+            <div id="dashboardSection">
+                <div class="grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">📊</div>
+                        <div class="stat-label">Overall Grade</div>
+                        <div class="stat-value">85.5%</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">✓</div>
+                        <div class="stat-label">Attendance</div>
+                        <div class="stat-value">92%</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📝</div>
+                        <div class="stat-label">Pending Assignments</div>
+                        <div class="stat-value">3</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📚</div>
+                        <div class="stat-label">Books Issued</div>
+                        <div class="stat-value">2</div>
+                    </div>
+                </div>
+
+                <div class="grid" style="grid-template-columns: 2fr 1fr;">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Recent Results</h3>
+                        </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Subject</th>
+                                    <th>Test Type</th>
+                                    <th>Marks</th>
+                                    <th>Grade</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Mathematics</td>
+                                    <td>Unit Test 2</td>
+                                    <td>42/50</td>
+                                    <td><span class="status-badge status-success">A</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Science</td>
+                                    <td>Monthly Test</td>
+                                    <td>38/50</td>
+                                    <td><span class="status-badge status-success">B+</span></td>
+                                </tr>
+                                <tr>
+                                    <td>English</td>
+                                    <td>Unit Test 2</td>
+                                    <td>45/50</td>
+                                    <td><span class="status-badge status-success">A+</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Upcoming Events</h3>
+                        </div>
+                        <div class="event-item">
+                            <div class="event-date">
+                                <div class="event-day">25</div>
+                                <div class="event-month">NOV</div>
+                            </div>
+                            <div class="event-content">
+                                <div class="event-title">Annual Sports Day</div>
+                                <div class="event-time">09:00 AM - 04:00 PM</div>
+                            </div>
+                        </div>
+                        <div class="event-item">
+                            <div class="event-date">
+                                <div class="event-day">28</div>
+                                <div class="event-month">NOV</div>
+                            </div>
+                            <div class="event-content">
+                                <div class="event-title">Science Exhibition</div>
+                                <div class="event-time">10:00 AM - 02:00 PM</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            <div id="resultsSection" class="hidden">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Academic Results</h3>
+                        <button class="btn btn-primary" onclick="downloadResults()">📥 Download Report</button>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Subject</th>
+                                <th>Test Type</th>
+                                <th>Marks Obtained</th>
+                                <th>Total Marks</th>
+                                <th>Percentage</th>
+                                <th>Grade</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Mathematics</td>
+                                <td>Unit Test 2</td>
+                                <td>42</td>
+                                <td>50</td>
+                                <td>84%</td>
+                                <td><span class="status-badge status-success">A</span></td>
+                            </tr>
+                            <tr>
+                                <td>Science</td>
+                                <td>Monthly Test</td>
+                                <td>38</td>
+                                <td>50</td>
+                                <td>76%</td>
+                                <td><span class="status-badge status-success">B+</span></td>
+                            </tr>
+                            <tr>
+                                <td>English</td>
+                                <td>Unit Test 2</td>
+                                <td>45</td>
+                                <td>50</td>
+                                <td>90%</td>
+                                <td><span class="status-badge status-success">A+</span></td>
+                            </tr>
+                            <tr>
+                                <td>Hindi</td>
+                                <td>Unit Test 2</td>
+                                <td>40</td>
+                                <td>50</td>
+                                <td>80%</td>
+                                <td><span class="status-badge status-success">A</span></td>
+                            </tr>
+                            <tr>
+                                <td>Social Studies</td>
+                                <td>Monthly Test</td>
+                                <td>36</td>
+                                <td>50</td>
+                                <td>72%</td>
+                                <td><span class="status-badge status-success">B</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Attendance Section -->
+            <div id="attendanceSection" class="hidden">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Attendance Overview</h3>
+                    </div>
+                    <div class="grid">
+                        <div style="text-align: center; padding: 20px;">
+                            <div style="font-size: 48px; font-weight: 700; color: var(--color-primary);">92%</div>
+                            <div style="color: var(--color-text-secondary); margin-top: 8px;">Overall Attendance</div>
+                            <div style="margin-top: 12px;">165 of 180 days present</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Monthly Breakdown</h3>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Month</th>
+                                <th>Present</th>
+                                <th>Absent</th>
+                                <th>Total Days</th>
+                                <th>Percentage</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>November 2025</td>
+                                <td>18</td>
+                                <td>2</td>
+                                <td>20</td>
+                                <td>90%</td>
+                                <td><span class="status-badge status-success">Good</span></td>
+                            </tr>
+                            <tr>
+                                <td>October 2025</td>
+                                <td>21</td>
+                                <td>1</td>
+                                <td>22</td>
+                                <td>95%</td>
+                                <td><span class="status-badge status-success">Excellent</span></td>
+                            </tr>
+                            <tr>
+                                <td>September 2025</td>
+                                <td>19</td>
+                                <td>3</td>
+                                <td>22</td>
+                                <td>86%</td>
+                                <td><span class="status-badge status-success">Good</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Timetable Section -->
+            <div id="timetableSection" class="hidden">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Class Timetable - Class 6-A</h3>
+                        <button class="btn btn-primary" onclick="downloadTimetable()">📥 Download</button>
+                    </div>
+                    <div class="timetable-grid">
+                        <div class="timetable-cell timetable-header">Time</div>
+                        <div class="timetable-cell timetable-header">Monday</div>
+                        <div class="timetable-cell timetable-header">Tuesday</div>
+                        <div class="timetable-cell timetable-header">Wednesday</div>
+                        <div class="timetable-cell timetable-header">Thursday</div>
+                        <div class="timetable-cell timetable-header">Friday</div>
+                        
+                        <div class="timetable-cell timetable-time">08:00-09:00</div>
+                        <div class="timetable-cell timetable-subject">Mathematics</div>
+                        <div class="timetable-cell timetable-subject">English</div>
+                        <div class="timetable-cell timetable-subject">Science</div>
+                        <div class="timetable-cell timetable-subject">Hindi</div>
+                        <div class="timetable-cell timetable-subject">Mathematics</div>
+                        
+                        <div class="timetable-cell timetable-time">09:00-10:00</div>
+                        <div class="timetable-cell timetable-subject">Science</div>
+                        <div class="timetable-cell timetable-subject">Mathematics</div>
+                        <div class="timetable-cell timetable-subject">English</div>
+                        <div class="timetable-cell timetable-subject">Science</div>
+                        <div class="timetable-cell timetable-subject">English</div>
+                        
+                        <div class="timetable-cell timetable-time">10:00-10:30</div>
+                        <div class="timetable-cell timetable-subject" style="grid-column: span 5; background-color: var(--color-bg-2);">Break</div>
+                        
+                        <div class="timetable-cell timetable-time">10:30-11:30</div>
+                        <div class="timetable-cell timetable-subject">Social Studies</div>
+                        <div class="timetable-cell timetable-subject">Hindi</div>
+                        <div class="timetable-cell timetable-subject">Mathematics</div>
+                        <div class="timetable-cell timetable-subject">English</div>
+                        <div class="timetable-cell timetable-subject">Science</div>
+                        
+                        <div class="timetable-cell timetable-time">11:30-12:30</div>
+                        <div class="timetable-cell timetable-subject">Computer</div>
+                        <div class="timetable-cell timetable-subject">Art</div>
+                        <div class="timetable-cell timetable-subject">PE</div>
+                        <div class="timetable-cell timetable-subject">Music</div>
+                        <div class="timetable-cell timetable-subject">Social Studies</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Events Section -->
+            <div id="eventsSection" class="hidden">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Upcoming School Events</h3>
+                    </div>
+                    <div class="event-item">
+                        <div class="event-date">
+                            <div class="event-day">25</div>
+                            <div class="event-month">NOV</div>
+                        </div>
+                        <div class="event-content">
+                            <div class="event-title">Annual Sports Day 2025</div>
+                            <div class="event-time">09:00 AM - 04:00 PM | School Playground</div>
+                            <p style="margin-top: 8px; font-size: 14px; color: var(--color-text-secondary);">
+                                Annual sports competition with various athletic events. All students must participate.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="event-item">
+                        <div class="event-date">
+                            <div class="event-day">28</div>
+                            <div class="event-month">NOV</div>
+                        </div>
+                        <div class="event-content">
+                            <div class="event-title">Science Exhibition</div>
+                            <div class="event-time">10:00 AM - 02:00 PM | Science Lab</div>
+                            <p style="margin-top: 8px; font-size: 14px; color: var(--color-text-secondary);">
+                                Students will showcase their science projects. Parents are invited to attend.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="event-item">
+                        <div class="event-date">
+                            <div class="event-day">05</div>
+                            <div class="event-month">DEC</div>
+                        </div>
+                        <div class="event-content">
+                            <div class="event-title">Annual Day Celebration</div>
+                            <div class="event-time">05:00 PM - 08:00 PM | Auditorium</div>
+                            <p style="margin-top: 8px; font-size: 14px; color: var(--color-text-secondary);">
+                                Cultural programs, dance, music performances, and award ceremonies.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="event-item">
+                        <div class="event-date">
+                            <div class="event-day">15</div>
+                            <div class="event-month">DEC</div>
+                        </div>
+                        <div class="event-content">
+                            <div class="event-title">Winter Vacation Begins</div>
+                            <div class="event-time">After school hours</div>
+                            <p style="margin-top: 8px; font-size: 14px; color: var(--color-text-secondary);">
+                                School closes for winter break. Classes resume on January 5th, 2026.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Syllabus Section -->
+            <div id="syllabusSection" class="hidden">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Course Syllabus - Class 6</h3>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Subject</th>
+                                <th>Topic</th>
+                                <th>Progress</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Mathematics</strong></td>
+                                <td>Algebra, Geometry, Number Systems</td>
+                                <td>
+                                    <div style="font-size: 12px; color: var(--color-text-secondary); margin-bottom: 4px;">65% Complete</div>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 65%;"></div>
+                                    </div>
+                                </td>
+                                <td><button class="btn btn-secondary" onclick="viewSyllabus('Mathematics')">View Details</button></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Science</strong></td>
+                                <td>Physics, Chemistry, Biology</td>
+                                <td>
+                                    <div style="font-size: 12px; color: var(--color-text-secondary); margin-bottom: 4px;">58% Complete</div>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 58%;"></div>
+                                    </div>
+                                </td>
+                                <td><button class="btn btn-secondary" onclick="viewSyllabus('Science')">View Details</button></td>
+                            </tr>
+                            <tr>
+                                <td><strong>English</strong></td>
+                                <td>Grammar, Literature, Writing</td>
+                                <td>
+                                    <div style="font-size: 12px; color: var(--color-text-secondary); margin-bottom: 4px;">72% Complete</div>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 72%;"></div>
+                                    </div>
+                                </td>
+                                <td><button class="btn btn-secondary" onclick="viewSyllabus('English')">View Details</button></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Hindi</strong></td>
+                                <td>व्याकरण, साहित्य, रचना</td>
+                                <td>
+                                    <div style="font-size: 12px; color: var(--color-text-secondary); margin-bottom: 4px;">68% Complete</div>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 68%;"></div>
+                                    </div>
+                                </td>
+                                <td><button class="btn btn-secondary" onclick="viewSyllabus('Hindi')">View Details</button></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Social Studies</strong></td>
+                                <td>History, Geography, Civics</td>
+                                <td>
+                                    <div style="font-size: 12px; color: var(--color-text-secondary); margin-bottom: 4px;">55% Complete</div>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 55%;"></div>
+                                    </div>
+                                </td>
+                                <td><button class="btn btn-secondary" onclick="viewSyllabus('Social Studies')">View Details</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Assignments Section -->
+            <div id="assignmentsSection" class="hidden">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Assignments & Practicals</h3>
+                        <button class="btn btn-primary" onclick="openSubmitModal()">📤 Submit Assignment</button>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Subject</th>
+                                <th>Assignment Title</th>
+                                <th>Due Date</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Mathematics</td>
+                                <td>Algebraic Equations Practice</td>
+                                <td>Nov 25, 2025</td>
+                                <td><span class="status-badge status-warning">Pending</span></td>
+                                <td><button class="btn btn-secondary" onclick="submitAssignment('Math')">Submit</button></td>
+                            </tr>
+                            <tr>
+                                <td>Science</td>
+                                <td>Plant Cell Diagram</td>
+                                <td>Nov 22, 2025</td>
+                                <td><span class="status-badge status-success">Submitted</span></td>
+                                <td><button class="btn btn-secondary" disabled>View</button></td>
+                            </tr>
+                            <tr>
+                                <td>English</td>
+                                <td>Essay on Climate Change</td>
+                                <td>Nov 28, 2025</td>
+                                <td><span class="status-badge status-warning">Pending</span></td>
+                                <td><button class="btn btn-secondary" onclick="submitAssignment('English')">Submit</button></td>
+                            </tr>
+                            <tr>
+                                <td>Computer</td>
+                                <td>Python Programming Practical</td>
+                                <td>Nov 30, 2025</td>
+                                <td><span class="status-badge status-warning">Pending</span></td>
+                                <td><button class="btn btn-secondary" onclick="submitAssignment('Computer')">Submit</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Library Section -->
+            <div id="librarySection" class="hidden">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Issued Books</h3>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Book Title</th>
+                                <th>Author</th>
+                                <th>Book ID</th>
+                                <th>Issue Date</th>
+                                <th>Due Date</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Python Programming for Beginners</td>
+                                <td>John Smith</td>
+                                <td>LIB-2045</td>
+                                <td>Nov 10, 2025</td>
+                                <td>Dec 10, 2025</td>
+                                <td><span class="status-badge status-success">Active</span></td>
+                            </tr>
+                            <tr>
+                                <td>Indian History - Part 1</td>
+                                <td>R.S. Sharma</td>
+                                <td>LIB-3201</td>
+                                <td>Nov 15, 2025</td>
+                                <td>Dec 15, 2025</td>
+                                <td><span class="status-badge status-success">Active</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Available Books</h3>
+                    </div>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px;">
+                        <div style="background: var(--color-bg-1); padding: 16px; border-radius: var(--radius-base);">
+                            <div style="font-weight: 600; margin-bottom: 8px;">Data Science Basics</div>
+                            <div style="font-size: 14px; color: var(--color-text-secondary); margin-bottom: 8px;">by Emily Chen</div>
+                            <button class="btn btn-primary" style="width: 100%; padding: 8px;">Request</button>
+                        </div>
+                        <div style="background: var(--color-bg-2); padding: 16px; border-radius: var(--radius-base);">
+                            <div style="font-weight: 600; margin-bottom: 8px;">World Geography</div>
+                            <div style="font-size: 14px; color: var(--color-text-secondary); margin-bottom: 8px;">by David Wilson</div>
+                            <button class="btn btn-primary" style="width: 100%; padding: 8px;">Request</button>
+                        </div>
+                        <div style="background: var(--color-bg-3); padding: 16px; border-radius: var(--radius-base);">
+                            <div style="font-weight: 600; margin-bottom: 8px;">Advanced Mathematics</div>
+                            <div style="font-size: 14px; color: var(--color-text-secondary); margin-bottom: 8px;">by Prof. Kumar</div>
+                            <button class="btn btn-primary" style="width: 100%; padding: 8px;">Request</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Achievements Section -->
+            <div id="achievementsSection" class="hidden">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Achievements & Certificates</h3>
+                    </div>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px;">
+                        <div class="card" style="background: var(--color-bg-1);">
+                            <div style="display: flex; align-items: center; gap: 16px;">
+                                <div style="width: 60px; height: 60px; background: var(--color-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px;">🏆</div>
+                                <div style="flex: 1;">
+                                    <div style="font-weight: 600; margin-bottom: 4px;">First Prize - Science Exhibition</div>
+                                    <div style="font-size: 14px; color: var(--color-text-secondary);">October 2025</div>
+                                    <button class="btn btn-secondary" style="margin-top: 8px; font-size: 12px; padding: 6px 12px;" onclick="downloadCertificate('science')">📥 Download Certificate</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card" style="background: var(--color-bg-2);">
+                            <div style="display: flex; align-items: center; gap: 16px;">
+                                <div style="width: 60px; height: 60px; background: var(--color-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px;">🎖️</div>
+                                <div style="flex: 1;">
+                                    <div style="font-weight: 600; margin-bottom: 4px;">Perfect Attendance</div>
+                                    <div style="font-size: 14px; color: var(--color-text-secondary);">September 2025</div>
+                                    <button class="btn btn-secondary" style="margin-top: 8px; font-size: 12px; padding: 6px 12px;" onclick="downloadCertificate('attendance')">📥 Download Certificate</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card" style="background: var(--color-bg-3);">
+                            <div style="display: flex; align-items: center; gap: 16px;">
+                                <div style="width: 60px; height: 60px; background: var(--color-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px;">🥈</div>
+                                <div style="flex: 1;">
+                                    <div style="font-weight: 600; margin-bottom: 4px;">Runner Up - Quiz Competition</div>
+                                    <div style="font-size: 14px; color: var(--color-text-secondary);">August 2025</div>
+                                    <button class="btn btn-secondary" style="margin-top: 8px; font-size: 12px; padding: 6px 12px;" onclick="downloadCertificate('quiz')">📥 Download Certificate</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Documents Section -->
+            <div id="documentsSection" class="hidden">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Important Documents</h3>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Document Name</th>
+                                <th>Type</th>
+                                <th>Upload Date</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Birth Certificate</td>
+                                <td>Identity</td>
+                                <td>Jan 15, 2025</td>
+                                <td><button class="btn btn-secondary" onclick="downloadDocument('birth')">📥 Download</button></td>
+                            </tr>
+                            <tr>
+                                <td>Transfer Certificate</td>
+                                <td>Academic</td>
+                                <td>Apr 10, 2025</td>
+                                <td><button class="btn btn-secondary" onclick="downloadDocument('transfer')">📥 Download</button></td>
+                            </tr>
+                            <tr>
+                                <td>Medical Certificate</td>
+                                <td>Health</td>
+                                <td>Jun 20, 2025</td>
+                                <td><button class="btn btn-secondary" onclick="downloadDocument('medical')">📥 Download</button></td>
+                            </tr>
+                            <tr>
+                                <td>Progress Report</td>
+                                <td>Academic</td>
+                                <td>Oct 30, 2025</td>
+                                <td><button class="btn btn-secondary" onclick="downloadDocument('progress')">📥 Download</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Fees Section -->
+            <div id="feesSection" class="hidden">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Fee Payment Status</h3>
+                    </div>
+                    <div class="grid">
+                        <div class="stat-card">
+                            <div class="stat-label">Total Fees (Annual)</div>
+                            <div class="stat-value">₹45,000</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Paid Amount</div>
+                            <div class="stat-value" style="color: var(--color-success);">₹30,000</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Pending Amount</div>
+                            <div class="stat-value" style="color: var(--color-warning);">₹15,000</div>
+                        </div>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Term</th>
+                                <th>Amount</th>
+                                <th>Due Date</th>
+                                <th>Payment Date</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Term 1 (Apr-Jun)</td>
+                                <td>₹15,000</td>
+                                <td>Apr 15, 2025</td>
+                                <td>Apr 10, 2025</td>
+                                <td><span class="status-badge status-success">Paid</span></td>
+                                <td><button class="btn btn-secondary" onclick="downloadReceipt('term1')">📥 Receipt</button></td>
+                            </tr>
+                            <tr>
+                                <td>Term 2 (Jul-Sep)</td>
+                                <td>₹15,000</td>
+                                <td>Jul 15, 2025</td>
+                                <td>Jul 12, 2025</td>
+                                <td><span class="status-badge status-success">Paid</span></td>
+                                <td><button class="btn btn-secondary" onclick="downloadReceipt('term2')">📥 Receipt</button></td>
+                            </tr>
+                            <tr>
+                                <td>Term 3 (Oct-Dec)</td>
+                                <td>₹15,000</td>
+                                <td>Dec 15, 2025</td>
+                                <td>-</td>
+                                <td><span class="status-badge status-warning">Pending</span></td>
+                                <td><button class="btn btn-primary" onclick="payFees()">💳 Pay Now</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ID Card Section -->
+            <div id="idcardSection" class="hidden">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Smart Student ID Card</h3>
+                        <button class="btn btn-primary" onclick="downloadIDCard()">📥 Download ID Card</button>
+                    </div>
+                    <div style="max-width: 400px; margin: 0 auto;">
+                        <div class="id-card">
+                            <div class="id-card-content">
+                                <div class="id-card-header">
+                                    <div>
+                                        <div style="font-size: 16px; font-weight: 600; margin-bottom: 4px;">DEMO SCHOOL</div>
+                                        <div style="font-size: 12px; opacity: 0.9;">Student Identity Card</div>
+                                    </div>
+                                    <div class="id-qr" style="background: white; display: flex; align-items: center; justify-content: center; color: var(--color-primary); font-weight: bold; font-size: 10px;">QR</div>
+                                </div>
+                                <div style="display: flex; gap: 20px; align-items: center;">
+                                    <div class="id-photo">RK</div>
+                                    <div class="id-info">
+                                        <div class="id-name">Rahul Kumar</div>
+                                        <div class="id-details">Class: 6-A</div>
+                                        <div class="id-details">Roll No: 24</div>
+                                        <div class="id-details">Student ID: STU2025024</div>
+                                        <div class="id-details">Valid Till: Mar 2026</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card" style="margin-top: 20px;">
+                            <div style="text-align: center;">
+                                <p style="color: var(--color-text-secondary); font-size: 14px; margin-bottom: 16px;">
+                                    This smart ID card can be used for:
+                                </p>
+                                <div style="display: grid; gap: 12px; text-align: left;">
+                                    <div style="display: flex; align-items: center; gap: 12px;">
+                                        <div style="width: 32px; height: 32px; background: var(--color-bg-1); border-radius: 50%; display: flex; align-items: center; justify-content: center;">✓</div>
+                                        <div>Library book borrowing</div>
+                                    </div>
+                                    <div style="display: flex; align-items: center; gap: 12px;">
+                                        <div style="width: 32px; height: 32px; background: var(--color-bg-2); border-radius: 50%; display: flex; align-items: center; justify-content: center;">✓</div>
+                                        <div>Attendance marking</div>
+                                    </div>
+                                    <div style="display: flex; align-items: center; gap: 12px;">
+                                        <div style="width: 32px; height: 32px; background: var(--color-bg-3); border-radius: 50%; display: flex; align-items: center; justify-content: center;">✓</div>
+                                        <div>Canteen payments</div>
+                                    </div>
+                                    <div style="display: flex; align-items: center; gap: 12px;">
+                                        <div style="width: 32px; height: 32px; background: var(--color-bg-4); border-radius: 50%; display: flex; align-items: center; justify-content: center;">✓</div>
+                                        <div>School bus access</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Admin Portal -->
+    <div id="adminPortal" class="app-container hidden">
+        <aside class="sidebar">
+            <div class="logo">
+                <div class="logo-icon">AP</div>
+                <span>Admin Panel</span>
+            </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a class="nav-link active" onclick="showAdminSection('dashboard')">
+                            <span class="nav-icon">📊</span>
+                            Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" onclick="showAdminSection('students')">
+                            <span class="nav-icon">👨‍🎓</span>
+                            Students
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" onclick="showAdminSection('results')">
+                            <span class="nav-icon">📝</span>
+                            Results
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" onclick="showAdminSection('attendance')">
+                            <span class="nav-icon">✓</span>
+                            Attendance
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" onclick="showAdminSection('events')">
+                            <span class="nav-icon">🎉</span>
+                            Events
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" onclick="showAdminSection('assignments')">
+                            <span class="nav-icon">📄</span>
+                            Assignments
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" onclick="showAdminSection('fees')">
+                            <span class="nav-icon">💳</span>
+                            Fees
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div style="margin-top: auto; padding-top: 20px; border-top: 1px solid var(--color-border);">
+                <a class="nav-link" onclick="logout()">
+                    <span class="nav-icon">🚪</span>
+                    Logout
+                </a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="header">
+                <h1 class="header-title" id="adminSectionTitle">Admin Dashboard</h1>
+                <div class="header-actions">
+                    <button class="theme-toggle" onclick="toggleTheme()">
+                        <span id="themeIconAdmin">🌙</span>
+                    </button>
+                    <div class="user-profile">
+                        <div class="user-avatar">AD</div>
+                        <div>
+                            <div style="font-weight: 600; font-size: 14px;">Admin User</div>
+                            <div style="font-size: 12px; color: var(--color-text-secondary);">Administrator</div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Admin Dashboard -->
+            <div id="adminDashboardSection">
+                <div class="grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">👨‍🎓</div>
+                        <div class="stat-label">Total Students</div>
+                        <div class="stat-value">450</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">👨‍🏫</div>
+                        <div class="stat-label">Total Teachers</div>
+                        <div class="stat-value">35</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📚</div>
+                        <div class="stat-label">Total Classes</div>
+                        <div class="stat-value">24</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">✓</div>
+                        <div class="stat-label">Avg Attendance</div>
+                        <div class="stat-value">89%</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Recent Activities</h3>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Activity</th>
+                                <th>User</th>
+                                <th>Time</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Result Updated - Class 6-A Mathematics</td>
+                                <td>Mr. Sharma</td>
+                                <td>2 hours ago</td>
+                                <td><span class="status-badge status-success">Complete</span></td>
+                            </tr>
+                            <tr>
+                                <td>New Student Admission</td>
+                                <td>Admin User</td>
+                                <td>5 hours ago</td>
+                                <td><span class="status-badge status-success">Complete</span></td>
+                            </tr>
+                            <tr>
+                                <td>Attendance Marked - Class 7-B</td>
+                                <td>Ms. Gupta</td>
+                                <td>1 day ago</td>
+                                <td><span class="status-badge status-success">Complete</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Admin Students Section -->
+            <div id="adminStudentsSection" class="hidden">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Student Management</h3>
+                        <button class="btn btn-primary" onclick="openAddStudentModal()">➕ Add New Student</button>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Student ID</th>
+                                <th>Name</th>
+                                <th>Class</th>
+                                <th>Roll No</th>
+                                <th>Email</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>STU2025024</td>
+                                <td>Rahul Kumar</td>
+                                <td>6-A</td>
+                                <td>24</td>
+                                <td>rahul@demo.com</td>
+                                <td>
+                                    <button class="btn btn-secondary" onclick="editStudent('STU2025024')">✏️ Edit</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>STU2025025</td>
+                                <td>Priya Sharma</td>
+                                <td>6-A</td>
+                                <td>25</td>
+                                <td>priya@demo.com</td>
+                                <td>
+                                    <button class="btn btn-secondary" onclick="editStudent('STU2025025')">✏️ Edit</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>STU2025026</td>
+                                <td>Amit Singh</td>
+                                <td>6-B</td>
+                                <td>12</td>
+                                <td>amit@demo.com</td>
+                                <td>
+                                    <button class="btn btn-secondary" onclick="editStudent('STU2025026')">✏️ Edit</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Admin Results Section -->
+            <div id="adminResultsSection" class="hidden">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Results Management</h3>
+                        <button class="btn btn-primary" onclick="openAddResultModal()">➕ Add New Result</button>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Select Class</label>
+                        <select class="form-control" onchange="filterResults(this.value)">
+                            <option value="6-A">Class 6-A</option>
+                            <option value="6-B">Class 6-B</option>
+                            <option value="7-A">Class 7-A</option>
+                            <option value="7-B">Class 7-B</option>
+                        </select>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Student Name</th>
+                                <th>Roll No</th>
+                                <th>Subject</th>
+                                <th>Test Type</th>
+                                <th>Marks</th>
+                                <th>Grade</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Rahul Kumar</td>
+                                <td>24</td>
+                                <td>Mathematics</td>
+                                <td>Unit Test 2</td>
+                                <td>42/50</td>
+                                <td>A</td>
+                                <td>
+                                    <button class="btn btn-secondary" onclick="editResult('1')">✏️ Edit</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Priya Sharma</td>
+                                <td>25</td>
+                                <td>Mathematics</td>
+                                <td>Unit Test 2</td>
+                                <td>46/50</td>
+                                <td>A+</td>
+                                <td>
+                                    <button class="btn btn-secondary" onclick="editResult('2')">✏️ Edit</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Admin Attendance Section -->
+            <div id="adminAttendanceSection" class="hidden">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Attendance Management</h3>
+                        <button class="btn btn-primary" onclick="openMarkAttendanceModal()">✓ Mark Attendance</button>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Select Class & Date</label>
+                        <div style="display: flex; gap: 12px;">
+                            <select class="form-control">
+                                <option value="6-A">Class 6-A</option>
+                                <option value="6-B">Class 6-B</option>
+                                <option value="7-A">Class 7-A</option>
+                            </select>
+                            <input type="date" class="form-control" value="2025-11-21">
+                        </div>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Roll No</th>
+                                <th>Student Name</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>24</td>
+                                <td>Rahul Kumar</td>
+                                <td><span class="status-badge status-success">Present</span></td>
+                                <td>
+                                    <button class="btn btn-secondary" onclick="toggleAttendance('24')">Toggle</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>25</td>
+                                <td>Priya Sharma</td>
+                                <td><span class="status-badge status-success">Present</span></td>
+                                <td>
+                                    <button class="btn btn-secondary" onclick="toggleAttendance('25')">Toggle</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>26</td>
+                                <td>Amit Singh</td>
+                                <td><span class="status-badge status-error">Absent</span></td>
+                                <td>
+                                    <button class="btn btn-secondary" onclick="toggleAttendance('26')">Toggle</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Admin Events Section -->
+            <div id="adminEventsSection" class="hidden">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Events Management</h3>
+                        <button class="btn btn-primary" onclick="openAddEventModal()">➕ Add New Event</button>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Event Name</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Location</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Annual Sports Day</td>
+                                <td>Nov 25, 2025</td>
+                                <td>09:00 AM - 04:00 PM</td>
+                                <td>School Playground</td>
+                                <td>
+                                    <button class="btn btn-secondary" onclick="editEvent('1')">✏️ Edit</button>
+                                    <button class="btn btn-secondary" onclick="deleteEvent('1')">🗑️ Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Science Exhibition</td>
+                                <td>Nov 28, 2025</td>
+                                <td>10:00 AM - 02:00 PM</td>
+                                <td>Science Lab</td>
+                                <td>
+                                    <button class="btn btn-secondary" onclick="editEvent('2')">✏️ Edit</button>
+                                    <button class="btn btn-secondary" onclick="deleteEvent('2')">🗑️ Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Admin Assignments Section -->
+            <div id="adminAssignmentsSection" class="hidden">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Assignments Management</h3>
+                        <button class="btn btn-primary" onclick="openAddAssignmentModal()">➕ Create Assignment</button>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Subject</th>
+                                <th>Assignment Title</th>
+                                <th>Class</th>
+                                <th>Due Date</th>
+                                <th>Submissions</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Mathematics</td>
+                                <td>Algebraic Equations Practice</td>
+                                <td>6-A</td>
+                                <td>Nov 25, 2025</td>
+                                <td>18/30</td>
+                                <td>
+                                    <button class="btn btn-secondary" onclick="viewSubmissions('1')">View</button>
+                                    <button class="btn btn-secondary" onclick="editAssignment('1')">✏️ Edit</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Science</td>
+                                <td>Plant Cell Diagram</td>
+                                <td>6-A</td>
+                                <td>Nov 22, 2025</td>
+                                <td>27/30</td>
+                                <td>
+                                    <button class="btn btn-secondary" onclick="viewSubmissions('2')">View</button>
+                                    <button class="btn btn-secondary" onclick="editAssignment('2')">✏️ Edit</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Admin Fees Section -->
+            <div id="adminFeesSection" class="hidden">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Fee Management</h3>
+                    </div>
+                    <div class="grid">
+                        <div class="stat-card">
+                            <div class="stat-label">Total Fees Collected</div>
+                            <div class="stat-value" style="color: var(--color-success);">₹1,35,00,000</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Pending Fees</div>
+                            <div class="stat-value" style="color: var(--color-warning);">₹15,00,000</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Students Pending</div>
+                            <div class="stat-value">85</div>
+                        </div>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Student Name</th>
+                                <th>Class</th>
+                                <th>Total Fees</th>
+                                <th>Paid</th>
+                                <th>Pending</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Rahul Kumar</td>
+                                <td>6-A</td>
+                                <td>₹45,000</td>
+                                <td>₹30,000</td>
+                                <td>₹15,000</td>
+                                <td><span class="status-badge status-warning">Partial</span></td>
+                            </tr>
+                            <tr>
+                                <td>Priya Sharma</td>
+                                <td>6-A</td>
+                                <td>₹45,000</td>
+                                <td>₹45,000</td>
+                                <td>₹0</td>
+                                <td><span class="status-badge status-success">Paid</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal for Submit Assignment -->
+    <div id="submitModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Submit Assignment</h3>
+                <button class="close-btn" onclick="closeSubmitModal()">&times;</button>
+            </div>
+            <form onsubmit="handleSubmitAssignment(event)">
+                <div class="form-group">
+                    <label class="form-label">Select Subject</label>
+                    <select class="form-control" required>
+                        <option value="">Choose subject...</option>
+                        <option value="math">Mathematics</option>
+                        <option value="science">Science</option>
+                        <option value="english">English</option>
+                        <option value="computer">Computer</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Upload File</label>
+                    <div class="file-upload">
+                        <input type="file" id="assignmentFile" style="display: none;" onchange="handleFileSelect(event)">
+                        <div onclick="document.getElementById('assignmentFile').click()">
+                            <div style="font-size: 48px; margin-bottom: 12px;">📁</div>
+                            <div style="font-weight: 500; margin-bottom: 4px;">Click to upload</div>
+                            <div style="font-size: 14px; color: var(--color-text-secondary);">PDF, DOC, DOCX up to 10MB</div>
+                        </div>
+                    </div>
+                    <div id="fileName" style="margin-top: 12px; font-size: 14px; color: var(--color-text-secondary);"></div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Comments (Optional)</label>
+                    <textarea class="form-control" rows="4" placeholder="Add any comments..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Assignment</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Database simulation
+        const database = {
+            students: [
+                {
+                    id: 'STU2025024',
+                    name: 'Rahul Kumar',
+                    class: '6-A',
+                    rollNo: 24,
+                    email: 'student@demo.com',
+                    password: 'student123',
+                    attendance: 92,
+                    results: [
+                        { subject: 'Mathematics', marks: 42, total: 50, grade: 'A' },
+                        { subject: 'Science', marks: 38, total: 50, grade: 'B+' },
+                        { subject: 'English', marks: 45, total: 50, grade: 'A+' }
+                    ]
+                }
+            ],
+            admins: [
+                {
+                    email: 'admin@demo.com',
+                    password: 'admin123',
+                    name: 'Admin User'
+                }
+            ]
+        };
+
+        let currentUser = null;
+        let currentRole = 'student';
+
+        // Theme Management
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', newTheme);
+            
+            const icons = document.querySelectorAll('#themeIcon, #themeIconApp, #themeIconAdmin');
+            const texts = document.querySelectorAll('#themeText');
+            
+            icons.forEach(icon => {
+                icon.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+            });
+            
+            texts.forEach(text => {
+                text.textContent = newTheme === 'dark' ? 'Light Mode' : 'Dark Mode';
+            });
+        }
+
+        // Login Functions
+        function selectRole(role) {
+            currentRole = role;
+            const studentBtn = document.getElementById('studentRoleBtn');
+            const adminBtn = document.getElementById('adminRoleBtn');
+            
+            if (role === 'student') {
+                studentBtn.classList.add('active');
+                adminBtn.classList.remove('active');
+            } else {
+                adminBtn.classList.add('active');
+                studentBtn.classList.remove('active');
+            }
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            if (currentRole === 'student') {
+                const student = database.students.find(s => s.email === email && s.password === password);
+                if (student) {
+                    currentUser = student;
+                    document.getElementById('loginScreen').classList.add('hidden');
+                    document.getElementById('studentPortal').classList.remove('hidden');
+                } else {
+                    alert('Invalid credentials! Use: student@demo.com / student123');
+                }
+            } else {
+                const admin = database.admins.find(a => a.email === email && a.password === password);
+                if (admin) {
+                    currentUser = admin;
+                    document.getElementById('loginScreen').classList.add('hidden');
+                    document.getElementById('adminPortal').classList.remove('hidden');
+                } else {
+                    alert('Invalid credentials! Use: admin@demo.com / admin123');
+                }
+            }
+        }
+
+        function logout() {
+            currentUser = null;
+            document.getElementById('studentPortal').classList.add('hidden');
+            document.getElementById('adminPortal').classList.add('hidden');
+            document.getElementById('loginScreen').classList.remove('hidden');
+            document.getElementById('loginEmail').value = '';
+            document.getElementById('loginPassword').value = '';
+        }
+
+        // Student Portal Navigation
+        function showSection(section) {
+            // Hide all sections
+            const sections = ['dashboard', 'results', 'attendance', 'timetable', 'events', 'syllabus', 'assignments', 'library', 'achievements', 'documents', 'fees', 'idcard'];
+            sections.forEach(s => {
+                document.getElementById(s + 'Section').classList.add('hidden');
+            });
+
+            // Show selected section
+            document.getElementById(section + 'Section').classList.remove('hidden');
+
+            // Update title
+            const titles = {
+                dashboard: 'Dashboard',
+                results: 'Results',
+                attendance: 'Attendance',
+                timetable: 'Timetable',
+                events: 'Events',
+                syllabus: 'Syllabus',
+                assignments: 'Assignments',
+                library: 'Library',
+                achievements: 'Achievements',
+                documents: 'Documents',
+                fees: 'Fees',
+                idcard: 'Smart ID Card'
+            };
+            document.getElementById('sectionTitle').textContent = titles[section];
+
+            // Update active nav link
+            document.querySelectorAll('#studentPortal .nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+
+        // Admin Portal Navigation
+        function showAdminSection(section) {
+            const sections = ['dashboard', 'students', 'results', 'attendance', 'events', 'assignments', 'fees'];
+            sections.forEach(s => {
+                const elem = document.getElementById('admin' + s.charAt(0).toUpperCase() + s.slice(1) + 'Section');
+                if (elem) elem.classList.add('hidden');
+            });
+
+            const elem = document.getElementById('admin' + section.charAt(0).toUpperCase() + section.slice(1) + 'Section');
+            if (elem) elem.classList.remove('hidden');
+
+            const titles = {
+                dashboard: 'Admin Dashboard',
+                students: 'Student Management',
+                results: 'Results Management',
+                attendance: 'Attendance Management',
+                events: 'Events Management',
+                assignments: 'Assignments Management',
+                fees: 'Fee Management'
+            };
+            document.getElementById('adminSectionTitle').textContent = titles[section];
+
+            document.querySelectorAll('#adminPortal .nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+
+        // Modal Functions
+        function openSubmitModal() {
+            document.getElementById('submitModal').classList.add('active');
+        }
+
+        function closeSubmitModal() {
+            document.getElementById('submitModal').classList.remove('active');
+        }
+
+        function handleSubmitAssignment(e) {
+            e.preventDefault();
+            alert('Assignment submitted successfully!');
+            closeSubmitModal();
+        }
+
+        function handleFileSelect(e) {
+            const file = e.target.files[0];
+            if (file) {
+                document.getElementById('fileName').textContent = `Selected: ${file.name}`;
+            }
+        }
+
+        // Action Functions
+        function downloadResults() {
+            alert('Downloading results report...');
+        }
+
+        function downloadTimetable() {
+            alert('Downloading timetable...');
+        }
+
+        function viewSyllabus(subject) {
+            alert(`Viewing ${subject} syllabus details...`);
+        }
+
+        function submitAssignment(subject) {
+            openSubmitModal();
+        }
+
+        function downloadCertificate(type) {
+            alert(`Downloading ${type} certificate...`);
+        }
+
+        function downloadDocument(type) {
+            alert(`Downloading ${type} document...`);
+        }
+
+        function downloadReceipt(term) {
+            alert(`Downloading ${term} fee receipt...`);
+        }
+
+        function payFees() {
+            alert('Redirecting to payment gateway...');
+        }
+
+        function downloadIDCard() {
+            alert('Downloading Smart ID Card...');
+        }
+
+        // Admin Functions
+        function openAddStudentModal() {
+            alert('Add Student form would open here');
+        }
+
+        function editStudent(id) {
+            alert(`Editing student ${id}`);
+        }
+
+        function openAddResultModal() {
+            alert('Add Result form would open here');
+        }
+
+        function editResult(id) {
+            alert(`Editing result ${id}`);
+        }
+
+        function filterResults(classId) {
+            alert(`Filtering results for ${classId}`);
+        }
+
+        function openMarkAttendanceModal() {
+            alert('Mark Attendance form would open here');
+        }
+
+        function toggleAttendance(rollNo) {
+            alert(`Toggling attendance for roll no ${rollNo}`);
+        }
+
+        function openAddEventModal() {
+            alert('Add Event form would open here');
+        }
+
+        function editEvent(id) {
+            alert(`Editing event ${id}`);
+        }
+
+        function deleteEvent(id) {
+            if (confirm('Are you sure you want to delete this event?')) {
+                alert(`Event ${id} deleted`);
+            }
+        }
+
+        function openAddAssignmentModal() {
+            alert('Create Assignment form would open here');
+        }
+
+        function viewSubmissions(id) {
+            alert(`Viewing submissions for assignment ${id}`);
+        }
+
+        function editAssignment(id) {
+            alert(`Editing assignment ${id}`);
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('submitModal');
+            if (event.target === modal) {
+                closeSubmitModal();
+            }
+        }
+
+        // Initialize theme
+        document.addEventListener('DOMContentLoaded', function() {
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            if (prefersDark) {
+                toggleTheme();
+            }
+        });
+    </script>
+</body>
+</html>
+
